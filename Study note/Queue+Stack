@@ -1,0 +1,170 @@
+讀書筆記：Stack 與 Queue（堆疊與佇列）
+
+整體概念
+
+Stack（堆疊）與 Queue（佇列） 常用來記錄「尚待處理的狀態或任務」。
+它們透過不同的取出順序規則來決定「接下來要處理哪一個元素」：
+	•	Stack：後進先出（LIFO）
+	•	Queue：先進先出（FIFO）
+
+因此在演算法與系統中，常用來管理流程控制、排程與暫存資料。
+
+⸻
+
+Stack（堆疊）
+
+基本特性
+	•	線性資料結構
+	•	遵循 Last-In-First-Out（LIFO） 或 First-In-Last-Out（FILO）
+	•	只在**同一端（top）**進行操作
+	•	類似一疊盤子，只能從最上面放入或取出
+
+常見操作
+	•	Push：將元素加入頂端
+	•	Pop：移除頂端元素
+	•	Top / Peek：查看頂端元素但不移除
+
+⸻
+
+Queue（佇列）
+
+基本特性
+	•	線性資料結構
+	•	遵循 First-In-First-Out（FIFO）
+	•	從一端加入、另一端移除
+	•	類似排隊，先來的人先被服務
+
+常見操作
+	•	Enqueue：從尾端加入元素
+	•	Dequeue：從前端移除元素
+	•	Front / Peek：查看前端元素但不移除
+
+⸻
+
+抽象到實作的關鍵：輸入與輸出方向
+
+透過「插入端（input）」與「移除端（output）」即可將抽象概念轉為具體實作。
+
+Stack：單一端點（Top）
+	•	插入：Top
+	•	移除：Top
+	•	輸入與輸出在同一端
+
+常見對應：
+	•	陣列：top index 移動
+	•	連結串列：head 作為 top
+
+⸻
+
+Queue：兩個端點（Rear → Front）
+	•	插入：Rear
+	•	移除：Front
+	•	輸入與輸出在相反端
+
+常見對應：
+	•	陣列：循環陣列（front / rear）
+	•	連結串列：head = front，tail = rear
+
+⸻
+
+抽象資料型別（ADT）
+
+Stack ADT（LIFO）
+
+支援操作：
+	•	Create
+	•	Push
+	•	Pop
+	•	Top / Peek
+	•	isEmpty
+	•	Size（若有維護）
+
+核心性質：
+	•	最新放入的元素，會最先被取出
+
+⸻
+
+Queue ADT（FIFO）
+
+支援操作：
+	•	Create
+	•	Enqueue
+	•	Dequeue
+	•	Front / Peek
+	•	isEmpty
+	•	Size（若有維護）
+
+核心性質：
+	•	先進入佇列的元素，會先被移除
+
+⸻
+
+複雜度重點整理
+
+時間複雜度（ADT 層級）
+	•	Stack
+	•	Push / Pop / Peek：O(1)
+	•	Queue
+	•	Enqueue / Dequeue / Peek：O(1)
+
+（動態陣列在擴容時可能出現攤銷行為，但平均仍為 O(1)）
+
+⸻
+
+空間複雜度
+	•	Stack
+	•	陣列或連結串列皆為 O(n)
+	•	Queue
+	•	循環陣列或連結串列皆為 O(n)
+	•	連結串列每個元素需額外指標空間
+
+⸻
+
+優缺點比較
+
+Stack
+
+優點
+	•	結構簡單、操作快速
+	•	適合 LIFO 問題（函式呼叫、回溯、DFS、Undo/Redo）
+	•	陣列實作快取友善
+
+缺點
+	•	只能存取頂端元素
+	•	固定容量可能 overflow
+	•	不適合 FIFO 場景
+
+⸻
+
+Queue
+
+優點
+	•	公平順序（FIFO）
+	•	適合排程、緩衝、BFS
+	•	enqueue / dequeue 效率高
+
+缺點
+	•	存取受限（主要是 front）
+	•	非循環陣列實作容易退化成 O(n)
+	•	固定容量可能 overflow
+
+⸻
+
+常見變形（考試常見）
+
+Stack 變形
+	•	動態 stack
+	•	固定大小 stack
+	•	Min / Max stack
+	•	Monotonic stack
+	•	兩個 stack 共用一個陣列
+
+⸻
+
+Queue 變形
+	•	Circular Queue（循環佇列）
+	•	Deque（雙端佇列）
+	•	Priority Queue（優先佇列）
+	•	Blocking Queue
+	•	兩個 stack 實作 queue
+	•	Monotonic Queue（滑動視窗）
