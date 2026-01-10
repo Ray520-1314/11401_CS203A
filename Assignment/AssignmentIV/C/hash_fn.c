@@ -15,12 +15,25 @@
 #include "hash_fn.h"
 
 int myHashInt(int key, int m) {
-    // TODO: replace with your own design
-    return key % m;  // division method example
+    unsigned int x = (unsigned int)key;
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = ((x >> 16) ^ x) * 0x45d9f3b;
+    x = (x >> 16) ^ x;
+    return (int)(x % m);
 }
 
 int myHashString(const char* str, int m) {
-    unsigned long hash = 0;
-    // TODO: replace with your own design
-    return (int)(hash % m); // basic division method
+    unsigned long hash = 5381;
+    const unsigned char* p = (const unsigned char*)str;
+    while (*p) {
+        hash = ((hash << 5) + hash) + *p;
+        p++;
+    }
+    return (int)(hash % m);
 }
+
+
+
+
+
+
