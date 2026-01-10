@@ -1,4 +1,4 @@
-讀書筆記：Tree（樹狀結構）
+**讀書筆記：Tree（樹狀結構）
 
 基本概念
 
@@ -178,3 +178,4 @@ Trie（字首樹）
 	•	Fenwick Tree（BIT）
 	•	k-d Tree / Quadtree
 	•	Decision Tree
+**
