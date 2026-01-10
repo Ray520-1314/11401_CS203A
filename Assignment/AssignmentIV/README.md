@@ -1,178 +1,53 @@
-# Homework Assignment IV: Hash Function Design & Observation (C/C++ Version)
+# Assignment IV – Hash Function Implementation
 
-This assignment focuses on the design and observation of hash functions using C/C++. 
-Students are expected to implement and analyze the behavior of hash functions, 
-evaluate their efficiency, and understand their applications in computer science.
+## 1. 文件架構
 
-Developer: [Your Name]  
-Email: [Your email]  
+<img width="199" height="455" alt="{2674D641-1CF9-423A-BC0E-CD4A07B2CB00}" src="https://github.com/user-attachments/assets/77d3bb5a-9c73-4801-ac9c-cb0133046945" />
 
-## My Hash Function
-### Integer Keys 
-- Formula / pseudocode:
-  ```text
-  [Your implementation here]
-  ```
-- Rationale: [Explain your design choices and how they minimize collisions.]
 
-### Non-integer Keys
-- Formula / pseudocode:
-  ```text
-  [Your implementation here]
-  ```
-- Rationale: [Explain your approach and its effectiveness for non-integer keys.]
+- `C/`：C 語言版本的 hash function 與測試程式  
+- `CXX/`：C++ 版本的 hash function 與測試程式  
+- `main.c / main.cpp`：觀察不同 table size 下的 hash 分布結果  
 
-## Experimental Setup
-- Table sizes tested (m): 10, 11, 37
-- Test dataset:
-  - Integers: 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60
-  - Strings: "cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"
-- Compiler: GCC and G++
-- Standard: C23 and C++23
+---
 
-## Results
-| Table Size (m) | Index Sequence         | Observation              |
-|----------------|------------------------|--------------------------|
-| 10             | 1, 2, 3, 4, ...        | Pattern repeats every 10 |
-| 11             | 10, 0, 1, 2, ...       | More uniform             |
-| 37             | 20, 21, 22, 23, ...    | Near-uniform             |
+## 2. Hash Function 設計原理說明
 
-## Compilation, Build, Execution, and Output
+### Integer Hash
+- 將整數轉為 unsigned 型別
+- 使用位元混合（bit mixing）與乘法擴散
+- 降低相鄰整數造成的碰撞機率
+- 最後使用 `mod m` 對應到 hash table 範圍
 
-### Compilation
-- The project uses a comprehensive Makefile that builds both C and C++ versions with proper flags:
-  ```bash
-  # Build both C and C++ versions
-  make all
-  
-  # Build only C version
-  make c
-  
-  # Build only C++ version
-  make cxx
-  ```
+設計目標：  
+> 改善單純 `key % m` 容易產生碰撞的問題，提升分布均勻性
 
-### Manual Compilation (if needed)
-- Command for C:
-  ```bash
-  gcc -std=c23 -Wall -Wextra -Wpedantic -g -o C/hash_function C/main.c C/hash_fn.c
-  ```
-- Command for C++:
-  ```bash
-  g++ -std=c++23 -Wall -Wextra -Wpedantic -g -o CXX/hash_function_cpp CXX/main.cpp CXX/hash_fn.cpp
-  ```
+---
 
-### Clean Build Files
-- Remove all compiled files:
-  ```bash
-  make clean
-  ```
+### String Hash
+- 採用 **DJB2 hash algorithm**
+- 使用公式：`hash = hash * 33 + c`
+- 計算效率高，對短字串分布效果良好
+- 最後使用 `mod m` 取得索引值
 
-### Execution
-- Run the compiled binary:
-  ```bash
-  ./hash_function
-  ```
-  or
-  ```bash
-  ./hash_function_cpp
-  ```
+設計目標：  
+> 提供穩定且實作簡單的字串雜湊方法
 
-### Result Snapshot
-- Example output for integers:
-  ```
-  === Hash Function Observation (C Version) ===
+---
 
-  === Table Size m = 10 ===
-  Key     Index
-  -----------------
-  21      1
-  22      2
-  ...
+## 3. 輸出格式截圖（示意）
 
-  === Table Size m = 11 ===
-  Key     Index
-  -----------------
-  21      10
-  22      0
-  ...
+### Integer Hash（m = 11）
+<img width="172" height="192" alt="{B196DACB-6065-454E-8D1F-8DAA16817ED5}" src="https://github.com/user-attachments/assets/b3336a4a-00d6-4c96-a034-824cae5205ca" />
+### String Hash（m = 37）
 
-  === Table Size m = 37 ===
-  Key     Index
-  -----------------
-  21      21
-  22      22
-  ...
+---
 
-  === Hash Function Observation (C++ Version) ===
+## Final Evaluation
 
-  === Table Size m = 10 ===
-  Key     Index
-  -----------------
-  21      1
-  22      2
-  ...
+- 改良後的 hash function 較基本除法法有更好的分布性  
+- 在不同 table size（特別是質數）下表現穩定  
+- 適合作為 hash table 實驗與學習用途
+<img width="180" height="194" alt="{268EE3A2-B5C1-4D43-A222-74E7F58993A0}" src="https://github.com/user-attachments/assets/9e6a7271-0494-4671-b6f2-c5bdfbccc2a1" />
 
-  === Table Size m = 11 ===
-  Key     Index
-  -----------------
-  21      10
-  22      0
-  ...
 
-  === Table Size m = 37 ===
-  Key     Index
-  -----------------
-  21      21
-  22      22
-  ...
-  ```
-
-- Example output for strings:
-  ```
-  === String Hash (m = 10) ===
-  Key     Index
-  -----------------
-  cat     0
-  dog     0
-  ...
-
-  === String Hash (m = 11) ===
-  Key     Index
-  -----------------
-  cat     0
-  dog     0
-  ...
-
-  === String Hash (m = 37) ===
-  Key     Index
-  -----------------
-  cat     0
-  dog     0
-  ...
-  ```
-
-- Observations: Outputs align with the analysis, showing better distribution with prime table sizes.
-- Example output for integers:
-  ```
-  Hash table (m=10): [1, 2, 3, 4, 5, 6, 7, 8, 9, 0]
-  Hash table (m=11): [10, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-  Hash table (m=37): [20, 21, 22, 23, 24, 25, 26, 27, 28, 29, ...]
-  ```
-- Example output for strings:
-  ```
-  Hash table (m=10): ["cat", "dog", "bat", "cow", "ant", ...]
-  Hash table (m=11): ["fox", "cat", "dog", "bat", "cow", ...]
-  Hash table (m=37): ["bee", "hen", "pig", "fox", "cat", ...]
-  ```
-- Observations: Outputs align with the analysis, showing better distribution with prime table sizes.
-
-## Analysis
-- Prime vs non-prime `m`: Prime table sizes generally result in better distribution and fewer collisions.
-- Patterns or collisions: Non-prime table sizes tend to produce repetitive patterns, leading to more collisions.
-- Improvements: Use a prime table size and a well-designed hash function to enhance distribution.
-
-## Reflection
-1. Designing hash functions requires balancing simplicity and effectiveness to minimize collisions.
-2. Table size significantly impacts the uniformity of the hash distribution, with prime sizes performing better.
-3. The design using a prime table size and a linear transformation formula produced the most uniform index sequence.
