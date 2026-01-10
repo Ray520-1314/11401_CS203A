@@ -39,8 +39,9 @@
 
 ### Integer Hash（m = 11）
 <img width="172" height="192" alt="{B196DACB-6065-454E-8D1F-8DAA16817ED5}" src="https://github.com/user-attachments/assets/b3336a4a-00d6-4c96-a034-824cae5205ca" />
-### String Hash（m = 37）
 
+### String Hash（m = 37）
+<img width="180" height="194" alt="{268EE3A2-B5C1-4D43-A222-74E7F58993A0}" src="https://github.com/user-attachments/assets/9e6a7271-0494-4671-b6f2-c5bdfbccc2a1" />
 ---
 
 ## Final Evaluation
@@ -48,6 +49,5 @@
 - 改良後的 hash function 較基本除法法有更好的分布性  
 - 在不同 table size（特別是質數）下表現穩定  
 - 適合作為 hash table 實驗與學習用途
-<img width="180" height="194" alt="{268EE3A2-B5C1-4D43-A222-74E7F58993A0}" src="https://github.com/user-attachments/assets/9e6a7271-0494-4671-b6f2-c5bdfbccc2a1" />
 
 
