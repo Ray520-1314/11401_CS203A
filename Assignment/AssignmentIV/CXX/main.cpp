@@ -9,9 +9,9 @@
    defined in "hash_fn.cpp".
 
    Development History:
-    - 2025/11/11: Initial implementation
+    - 2026/01/10 gpt help me
 
-   Developer: Yu-Feng Huang <yfhuang@saturn.yzu.edu.tw>
+   Developer: Ray
  */
 
 #include <iostream>
@@ -22,10 +22,11 @@
 // Caution: Do not change the content of this file.
 
 int main() {
-    // Integer keys
-    std::vector<int> intKeys = {21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60};
-    
-    // Table sizes to test
+    std::vector<int> intKeys = {
+        21, 22, 23, 24, 25, 26, 27, 28, 29, 30,
+        51, 52, 53, 54, 55, 56, 57, 58, 59, 60
+    };
+
     std::vector<int> sizes = {10, 11, 37};
 
     std::cout << "=== Hash Function Observation (C++ Version) ===\n\n";
@@ -39,8 +40,11 @@ int main() {
         std::cout << "\n";
     }
 
-    // String keys (Non-integer keys)
-    std::vector<std::string> strKeys = {"cat", "dog", "bat", "cow", "ant", "owl", "bee", "hen", "pig", "fox"};
+    std::vector<std::string> strKeys = {
+        "cat", "dog", "bat", "cow", "ant",
+        "owl", "bee", "hen", "pig", "fox"
+    };
+
     for (int m : sizes) {
         std::cout << "=== String Hash (m = " << m << ") ===\n";
         std::cout << "Key\tIndex\n";
@@ -49,4 +53,6 @@ int main() {
             std::cout << s << "\t" << myHashString(s, m) << "\n";
         std::cout << "\n";
     }
+
+    return 0;
 }
