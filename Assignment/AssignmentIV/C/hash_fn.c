@@ -7,7 +7,7 @@
     This file contains the hash functions for integer and string keys.
 
    Development History:
-    - 2025/01/10: Refactored to use hash_fn.h
+    - 2026/01/10: Refactored to use hash_fn.h
 
    Developer: Ray
  */
